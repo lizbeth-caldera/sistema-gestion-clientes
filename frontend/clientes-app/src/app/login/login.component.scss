@@ -1,0 +1,61 @@
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, #60dfcd, #42c2b2); // nuevo fondo degradado verde-azulado
+  position: relative;
+}
+
+.login-card {
+  width: 380px;
+  padding: 2.5rem 2rem;
+  border-radius: 1.5rem;
+  background: #ffffff; // tarjeta blanca
+  color: #1a1a2e; // texto oscuro legible
+  position: relative;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #60dfcd, #42c2b2); // borde de color a juego
+}
+
+button.full-width {
+  width: 100%;
+  background-color: #2f9e8d !important; // verde elegante
+  color: #ffffff !important;
+}
+
+button.full-width:hover {
+  background-color: #268d7e !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-error {
+  color: #e53935;
+  font-size: 0.75rem;
+}
+
+mat-icon.me-1 {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+footer.watermark {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.4);
+}

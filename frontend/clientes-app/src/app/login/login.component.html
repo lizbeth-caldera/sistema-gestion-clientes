@@ -1,0 +1,46 @@
+<!-- Contenedor principal del login -->
+<div class="login-wrapper">
+
+  <!-- Tarjeta que envuelve el formulario -->
+  <mat-card class="login-card">
+
+    <!-- Título del formulario -->
+    <h1 class="mat-headline-4 text-center mb-3">
+      <mat-icon class="me-2">input</mat-icon> Ingreso
+    </h1>
+
+    <!-- Formulario reactivo, ejecuta login() al enviarse -->
+    <form [formGroup]="form" (ngSubmit)="login()" class="d-grid gap-3">
+
+      <!-- Campo de usuario -->
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" autocomplete="username">
+        <!-- Mensaje si el usuario está vacío -->
+        <mat-error *ngIf="form.get('username')?.hasError('required')">
+          Requerido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo de contraseña -->
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="current-password">
+        <!-- Mensaje si la contraseña esta vacaa -->
+        <mat-error *ngIf="form.get('password')?.hasError('required')">
+          Requerido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botón de enviar -->
+      <button mat-raised-button color="primary" class="full-width"
+              type="submit" [disabled]="form.invalid || loading">
+        <mat-icon class="me-1">input</mat-icon>
+        {{ loading ? 'Entrando…' : 'Entrar' }}
+      </button>
+    </form>
+
+  </mat-card>
+  <footer class="watermark">Hecho por Lizbeth Rivas</footer>
+
+</div>

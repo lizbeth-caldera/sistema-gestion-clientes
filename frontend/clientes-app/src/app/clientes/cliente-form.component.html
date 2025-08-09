@@ -1,0 +1,86 @@
+<!-- Contenedor principal del formulario -->
+<div class="cliente-wrapper">
+  <mat-card class="cliente-card animate__animated animate__fadeIn">
+
+    <!-- Título que cambia si es edición o creación -->
+    <h1 class="mat-headline-4 text-center mb-4">
+      {{ editMode ? 'Editar Cliente' : 'Nuevo Cliente' }}
+    </h1>
+
+    <!-- Formulario conectado al FormGroup del TS -->
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-grid">
+
+        <!-- Datos básicos del cliente -->
+        <mat-form-field appearance="outline">
+          <mat-label>Razón Social</mat-label>
+          <input matInput formControlName="razon_social">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo de Persona</mat-label>
+          <mat-select formControlName="tipo_persona"
+                      panelClass="combo-panel"
+                      (selectionChange)="onTipoChange($event.value)">
+            <mat-option value="FISICA">Física</mat-option>
+            <mat-option value="MORAL">Moral</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>RFC</mat-label>
+          <input matInput formControlName="rfc" mask="AAAA000000AAA">
+          <mat-hint>Ej: ABCD80101XX1</mat-hint>
+        </mat-form-field>
+
+        <!-- Datos de contacto -->
+        <mat-form-field appearance="outline">
+          <mat-label>Representante Legal</mat-label>
+          <input matInput formControlName="representante_legal">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" mask="(000) 000-0000">
+          <mat-hint>Ej: (123) 456-7890</mat-hint>
+        </mat-form-field>
+
+        <!-- Área para arrastrar o seleccionar archivo -->
+        <div class="drop-zone" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+          <p>{{ selectedFileName || tipoPersonaTexto }}</p>
+          <input type="file" (change)="onFile($event)" />
+        </div>
+
+        <!-- Si ya hay documento guardado, mostrar para descargar -->
+        <div class="doc-actual" *ngIf="currentDocumentoUrl">
+          <div class="doc-actual__info">
+            <span>Documento actual</span>
+          </div>
+          <a class="doc-actual__btn" [href]="currentDocumentoUrl" download>
+            <button mat-stroked-button type="button">
+              Descargar
+            </button>
+          </a>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="button-group">
+          <!-- Guardar: solo si el form es válido y no está cargando -->
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
+            Guardar
+          </button>
+          <!-- Cancelar: vuelve a la vista anterior -->
+          <button mat-raised-button color="warn" type="button" (click)="cancel()">
+            Cancelar
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </mat-card>
+</div>

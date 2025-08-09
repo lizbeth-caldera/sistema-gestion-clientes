@@ -1,0 +1,57 @@
+<div class="clientes-wrapper">
+  <div class="clientes-header">
+    <h2><mat-icon>groups</mat-icon> Clientes</h2>
+    <button mat-raised-button color="warn" (click)="logout()" class="logout-btn">
+      <mat-icon>logout</mat-icon> Cerrar sesión
+    </button>
+  </div>
+
+  <mat-card class="clientes-card animate__animated animate__fadeIn">
+    <table mat-table [dataSource]="clientes" class="clientes-tabla" matSort>
+
+      <!-- Razón Social -->
+      <ng-container matColumnDef="razon_social">
+        <th mat-header-cell *matHeaderCellDef> Razón Social </th>
+        <td mat-cell *matCellDef="let cliente"> {{ cliente.razon_social }} </td>
+      </ng-container>
+
+      <!-- RFC -->
+      <ng-container matColumnDef="rfc">
+        <th mat-header-cell *matHeaderCellDef> RFC </th>
+        <td mat-cell *matCellDef="let cliente"> {{ cliente.rfc }} </td>
+      </ng-container>
+
+      <!-- Documento -->
+      <ng-container matColumnDef="documento">
+        <th mat-header-cell *matHeaderCellDef> Documento </th>
+        <td mat-cell *matCellDef="let cliente">
+          <a *ngIf="cliente.documento" [href]="cliente.documento" download aria-label="Descargar documento">
+            <mat-icon>download</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let cliente">
+          <button mat-icon-button color="primary" (click)="editar(cliente)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(cliente)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="nuevo-btn-container">
+      <button mat-raised-button color="accent" routerLink="/clientes/nuevo">
+        <mat-icon>add</mat-icon> Nuevo Cliente
+      </button>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+
+.cliente-wrapper {
+  background: linear-gradient(135deg, #45D0C1, #6FE2C5);
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cliente-card {
+  background-color: #f8f9fa;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.form-grid {
+  position: relative; /* ← importante */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+
+  .mat-form-field {
+    width: 100%;
+    position: relative; /* ← importante */
+    z-index: 2;         /* ← por encima de la drop-zone */
+  }
+}
+
+.drop-zone {
+  grid-column: span 2;
+  background-color: #ffffff;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  color: #555;
+  transition: border-color 0.3s;
+  cursor: pointer;
+  z-index: 1; /* ← debajo del select */
+
+  mat-icon {
+    font-size: 48px;
+    color: #4caf50;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+
+  &:hover { border-color: #4caf50; }
+}
+
+.doc-actual {
+  grid-column: span 2;
+  margin-top: -0.25rem;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafafa;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    mat-icon { opacity: .8; }
+  }
+
+  &__btn button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.button-group {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}

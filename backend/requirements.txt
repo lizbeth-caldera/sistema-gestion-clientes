@@ -1,0 +1,12 @@
+flask
+flask-cors
+flask-mysqldb
+flask-jwt-extended
+python-dotenv
+flask
+flask-cors
+flask-mysqldb
+flask-jwt-extended
+python-dotenv
+pytest
+pytest-flask
