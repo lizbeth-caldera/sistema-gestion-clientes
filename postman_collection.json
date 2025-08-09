@@ -1,0 +1,112 @@
+{
+  "info": {
+    "name": "Sistema Gestion Clientes",
+    "_postman_id": "9c7c6f2e-7f5b-4a9b-9d3c-000000000001",
+    "description": "Colección para probar la API Flask (login + CRUD clientes).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000" },
+    { "key": "token", "value": "" },
+    { "key": "cliente_id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/login", "host": ["{{base_url}}"], "path": ["login"] }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let data = {};",
+                  "try { data = pm.response.json(); } catch(e) {}",
+                  "// Guarda token si tu backend responde { access_token: '...' }",
+                  "if (data && data.access_token) {",
+                  "  pm.collectionVariables.set('token', data.access_token);",
+                  "  pm.test('Token recibido', () => pm.expect(data.access_token).to.be.a('string'));",
+                  "} else {",
+                  "  pm.test('No se recibió access_token', () => pm.expect(false).to.be.true);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar clientes (GET)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/clientes", "host": ["{{base_url}}"], "path": ["clientes"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener cliente por ID (GET)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/clientes/{{cliente_id}}", "host": ["{{base_url}}"], "path": ["clientes", "{{cliente_id}}"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cliente (POST)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razon_social\": \"Ejemplo S.A. de C.V.\",\n  \"tipo_persona\": \"MORAL\",\n  \"rfc\": \"EJC850101AAA\",\n  \"representante_legal\": \"Juan Pérez\",\n  \"email\": \"contacto@ejemplo.com\",\n  \"telefono\": \"555-123-4567\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/clientes", "host": ["{{base_url}}"], "path": ["clientes"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar cliente (PUT)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razon_social\": \"Ejemplo S.A. de C.V. (editado)\",\n  \"tipo_persona\": \"MORAL\",\n  \"rfc\": \"EJC850101AAA\",\n  \"representante_legal\": \"Juan Pérez\",\n  \"email\": \"ventas@ejemplo.com\",\n  \"telefono\": \"555-987-6543\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/clientes/{{cliente_id}}", "host": ["{{base_url}}"], "path": ["clientes", "{{cliente_id}}"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar cliente (DELETE)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/clientes/{{cliente_id}}", "host": ["{{base_url}}"], "path": ["clientes", "{{cliente_id}}"] }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

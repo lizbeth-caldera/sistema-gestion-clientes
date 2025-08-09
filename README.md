@@ -55,7 +55,7 @@ Incluye autenticación con JWT, validaciones en frontend y backend, subida de do
 ## Estructura del Proyecto
 
 ```
-gestion-clientes/                  # Proyecto raíz
+gestion-clientes/                  # Proyecto raiz
 │
 ├── docker-compose.yml              # Orquestación Docker (backend, frontend, MySQL)
 ├── README.md                       # Documentación del proyecto
@@ -110,7 +110,7 @@ gestion-clientes/                  # Proyecto raíz
 │       │   │   └── environment.prod.ts# Produccion
 │       │   │
 │       │   ├── styles.scss            # Estilos globales
-│       │   └── index.html             # HTML raíz
+│       │   └── index.html             # HTML raiz
 ```
 
 ---
@@ -120,7 +120,7 @@ gestion-clientes/                  # Proyecto raíz
 ### Opcion 1 — Con Docker (Recomendada)
 Asegúrate de tener **Docker** y **Docker Compose** instalados.
 ```bash
-git clone <repo-url>
+git clone <https://github.com/lizbeth-caldera/sistema-gestion-clientes.git>
 cd gestion-clientes
 docker compose up --build
 ```
